@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Simulador de Margem Dialli</title>
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#06351f}
+.app{min-height:100vh;padding:25px 14px;background:linear-gradient(145deg,#012b17,#00642f,#012616)}
+.box{max-width:760px;margin:auto}
+.brand{text-align:center;color:#38d477;font-size:70px;font-weight:900;font-style:italic;opacity:.18}
+.dist{text-align:center;color:white;font-size:24px;opacity:.18;margin-top:-10px;margin-bottom:20px}
+h1{text-align:center;color:white;font-size:40px;margin:10px 0}
+h1 span{color:#ffd000}
+.intro{text-align:center;color:#dceee4;font-size:14px;margin-bottom:22px}
+.card,.result,.info{background:white;border-radius:18px;padding:17px}
+.card{border:2px solid #15914b}
+.grid,.results{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{display:block;color:#075b2c;font-weight:bold;font-size:13px;margin-bottom:8px}
+.input{display:flex;border:2px solid #15914b;border-radius:12px;overflow:hidden}
+.input span{padding:15px;font-weight:bold;color:#075b2c}
+.input input{width:100%;height:54px;border:0;outline:0;font-size:20px}
+.hint{font-size:12px;color:#68766f;margin-top:6px}
+.results{margin-top:14px}
+.result{text-align:center;border:1px solid #38bf70}
+.result:first-child{border-color:#e0b300}
+.result small{font-weight:bold;color:#145d35;font-size:12px}
+.num{font-size:32px;font-weight:bold;color:#075b2c;margin:9px 0}
+.result:first-child .num{color:#dfa900}
+.result p{font-size:12px;color:#68756f;margin:0}
+.info{margin-top:14px;font-size:13px;line-height:1.7}
+.info b{color:#075b2c}
+button{width:100%;height:50px;margin-top:14px;border:0;border-radius:12px;background:#075b2c;color:white;font-weight:bold;font-size:15px}
+@media(max-width:600px){
+.grid,.results{grid-template-columns:1fr}
+h1{font-size:31px}
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+<div class="box">
+
+<div class="brand">Dialli</div>
+<div class="dist">Distribuidora</div>
+
+<h1>SIMULADOR DE <span>MARGEM</span></h1>
+
+<p class="intro">
+Digite o custo e o preço de venda. O APP calcula automaticamente lucro, margem e markup.
+</p>
+
+<div class="card">
+
+<div class="grid">
+
+<div>
+<label>CUSTO DO PRODUTO</label>
+
+<div class="input">
+<span>R$</span>
+<input id="custo" inputmode="decimal" placeholder="Digite o custo">
+</div>
+
+<div class="hint">Ex.: 6,90</div>
+</div>
+
+<div>
+<label>PREÇO DE VENDA / OFERTA</label>
+
+<div class="input">
+<span>R$</span>
+<input id="venda" inputmode="decimal" placeholder="Digite o preço">
+</div>
+
+<div class="hint">Ex.: 10,00</div>
+</div>
+
+</div>
+</div>
+
+<div class="results">
+
+<div class="result">
+<small>PREÇO DE VENDA</small>
+<div class="num" id="rVenda">—</div>
+<p>Preço informado</p>
+</div>
+
+<div class="result">
+<small>LUCRO BRUTO</small>
+<div class="num" id="rLucro">—</div>
+<p>Venda − custo</p>
+</div>
+
+<div class="result">
+<small>MARGEM REAL</small>
+<div class="num" id="rMargem">—</div>
+<p>Lucro ÷ venda</p>
+</div>
+
+<div class="result">
+<small>MARKUP</small>
+<div class="num" id="rMarkup">—</div>
+<p>Venda ÷ custo</p>
+</div>
+
+</div>
+
+<div class="info">
+<b>FÓRMULAS</b><br>
+Lucro = Preço de Venda − Custo<br>
+Margem = Lucro ÷ Preço de Venda × 100<br>
+Markup = Preço de Venda ÷ Custo
+</div>
+
+<button id="limpar">LIMPAR TUDO</button>
+
+</div>
+</div>
+
+<script>
+
+const custo = document.getElementById("custo");
+const venda = document.getElementById("venda");
+
+const rVenda = document.getElementById("rVenda");
+const rLucro = document.getElementById("rLucro");
+const rMargem = document.getElementById("rMargem");
+const rMarkup = document.getElementById("rMarkup");
+
+function converter(valor){
+
+valor = String(valor || "")
+.trim()
+.replace(/R\$/gi,"")
+.replace(/\s/g,"");
+
+if(!valor) return null;
+
+if(valor.includes(",") && valor.includes(".")){
+
+if(valor.lastIndexOf(",") > valor.lastIndexOf(".")){
+valor = valor.replace(/\./g,"").replace(",",".");
+}else{
+valor = valor.replace(/,/g,"");
+}
+
+}else if(valor.includes(",")){
+valor = valor.replace(",",".");
+}
+
+const numero = Number(valor);
+
+return Number.isFinite(numero) ? numero : null;
+}
+
+function dinheiro(valor){
+
+return valor.toLocaleString("pt-BR",{
+style:"currency",
+currency:"BRL"
+});
+
+}
+
+function calcular(){
+
+const C = converter(custo.value);
+const V = converter(venda.value);
+
+if(C === null || V === null){
+
+rVenda.textContent="—";
+rLucro.textContent="—";
+rMargem.textContent="—";
+rMarkup.textContent="—";
+
+return;
+
+}
+
+const lucro = V - C;
+
+const margem = V !== 0
+? (lucro / V) * 100
+: 0;
+
+const markup = C !== 0
+? V / C
+: 0;
+
+rVenda.textContent = dinheiro(V);
+
+rLucro.textContent = dinheiro(lucro);
+
+rMargem.textContent =
+margem.toLocaleString("pt-BR",{
+minimumFractionDigits:2,
+maximumFractionDigits:2
+}) + "%";
+
+rMarkup.textContent =
+markup.toLocaleString("pt-BR",{
+minimumFractionDigits:2,
+maximumFractionDigits:2
+}) + "x";
+
+}
+
+custo.addEventListener("input",calcular);
+venda.addEventListener("input",calcular);
+
+document.getElementById("limpar").onclick=function(){
+
+custo.value="";
+venda.value="";
+
+calcular();
+
+};
+
+</script>
+
+</body>
+</html>

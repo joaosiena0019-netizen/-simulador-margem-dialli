@@ -1,19 +1,36 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>Calculadora Dialli</title>
 
 <meta name="application-name" content="Calculadora Dialli">
+
 <meta name="apple-mobile-web-app-title" content="Calculadora Dialli">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
 <meta name="theme-color" content="#075b2c">
 
-<link rel="manifest" href="manifest.json">
+<link rel="manifest" href="./manifest.json">
+
+<link rel="apple-touch-icon" sizes="180x180" href="./icon-180.png">
+
+<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+
+<link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png">
 
 <style>
-*{box-sizing:border-box}
+
+*{
+box-sizing:border-box
+}
 
 body{
 margin:0;
@@ -198,6 +215,7 @@ font-size:32px;
 }
 
 </style>
+
 </head>
 
 <body>
@@ -224,7 +242,8 @@ C565 285 430 285 310 267
 C200 250 115 220 75 185Z"
 fill="#08733f"/>
 
-<text x="350"
+<text
+x="350"
 y="205"
 text-anchor="middle"
 font-family="Arial,sans-serif"
@@ -235,7 +254,8 @@ fill="white">
 Dialli
 </text>
 
-<text x="350"
+<text
+x="350"
 y="255"
 text-anchor="middle"
 font-family="Arial,sans-serif"
@@ -244,7 +264,8 @@ fill="white">
 Distribuidora
 </text>
 
-<text x="350"
+<text
+x="350"
 y="330"
 text-anchor="middle"
 font-family="Arial,sans-serif"
@@ -511,11 +532,13 @@ if("serviceWorker" in navigator){
 window.addEventListener("load",function(){
 
 navigator.serviceWorker.register("./sw.js")
+
 .then(function(){
 
 console.log("Calculadora Dialli: modo offline ativado.");
 
 })
+
 .catch(function(error){
 
 console.log("Service Worker:",error);

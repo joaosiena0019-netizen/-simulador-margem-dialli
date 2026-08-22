@@ -26,10 +26,11 @@
 
 <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png">
 
+
 <style>
 
 *{
-box-sizing:border-box
+box-sizing:border-box;
 }
 
 body{
@@ -177,39 +178,97 @@ color:#075b2c;
 font-size:18px;
 }
 
-button{
+/* BOTÃO INSTALAR */
+
+.install-button{
+
 width:100%;
-height:54px;
-margin-top:14px;
+height:58px;
+
+margin-top:16px;
+
 border:0;
-border-radius:15px;
-background:#075b2c;
+border-radius:16px;
+
+background:#15914b;
+
 color:white;
+
 font-weight:bold;
+
 font-size:17px;
+
+box-shadow:0 4px 10px rgba(0,0,0,.20);
+
+cursor:pointer;
+
 }
 
-button:active{
+.install-button:active{
+
 transform:scale(.98);
+
+}
+
+.install-button:hover{
+
+background:#0f7c3f;
+
+}
+
+button#limpar{
+
+width:100%;
+height:54px;
+
+margin-top:14px;
+
+border:0;
+border-radius:15px;
+
+background:#075b2c;
+
+color:white;
+
+font-weight:bold;
+
+font-size:17px;
+
+}
+
+button#limpar:active{
+
+transform:scale(.98);
+
 }
 
 .footer{
+
 text-align:center;
 color:white;
+
 padding:25px 0 5px;
+
 font-size:15px;
+
 }
 
 .footer strong{
+
 display:block;
+
 font-size:22px;
+
 margin-top:5px;
+
 }
 
 @media(max-width:600px){
 
 h1{
+
 font-size:32px;
+
 }
 
 }
@@ -218,158 +277,287 @@ font-size:32px;
 
 </head>
 
+
 <body>
+
 
 <div class="app">
 
 <div class="box">
 
+
 <div class="logo">
 
 <svg viewBox="0 0 700 390">
+
 
 <path d="M75 185
 C110 80 270 30 440 55
 C555 70 630 120 650 190
 C610 105 485 80 370 88
 C240 95 135 130 75 185Z"
+
 fill="#ffd000"/>
+
 
 <path d="M75 185
 C110 275 260 315 430 300
 C520 292 590 260 620 220
 C565 285 430 285 310 267
 C200 250 115 220 75 185Z"
+
 fill="#08733f"/>
 
+
 <text
+
 x="350"
+
 y="205"
+
 text-anchor="middle"
+
 font-family="Arial,sans-serif"
+
 font-size="128"
+
 font-weight="900"
+
 font-style="italic"
+
 fill="white">
+
 Dialli
+
 </text>
 
+
 <text
+
 x="350"
+
 y="255"
+
 text-anchor="middle"
+
 font-family="Arial,sans-serif"
+
 font-size="38"
+
 fill="white">
+
 Distribuidora
+
 </text>
 
+
 <text
+
 x="350"
+
 y="330"
+
 text-anchor="middle"
+
 font-family="Arial,sans-serif"
+
 font-size="27"
+
 font-style="italic"
+
 fill="white">
+
 “Distribuir para melhor servir”
+
 </text>
+
 
 </svg>
 
 </div>
 
+
 <h1>
+
 CALCULADORA <span>DIALLI</span>
+
 </h1>
 
+
 <p class="intro">
+
 Digite o custo e o preço de venda. A calculadora informa automaticamente lucro, margem e markup.
+
 </p>
+
 
 <div class="card">
 
-<label>CUSTO DO PRODUTO</label>
+
+<label>
+
+CUSTO DO PRODUTO
+
+</label>
+
 
 <div class="input">
 
 <span>R$</span>
 
 <input
+
 id="custo"
+
 inputmode="decimal"
+
 placeholder="Digite o custo"
+
 autocomplete="off">
 
 </div>
 
+
 <div class="hint">
+
 Ex.: 6,90
+
 </div>
 
-<label>PREÇO DE VENDA / OFERTA</label>
+
+<label>
+
+PREÇO DE VENDA / OFERTA
+
+</label>
+
 
 <div class="input">
 
 <span>R$</span>
 
 <input
+
 id="venda"
+
 inputmode="decimal"
+
 placeholder="Digite o preço"
+
 autocomplete="off">
 
 </div>
 
+
 <div class="hint">
+
 Ex.: 10,00
-</div>
 
 </div>
+
+
+</div>
+
 
 <div class="result">
 
-<h2>PREÇO DE VENDA</h2>
+<h2>
 
-<div class="num" id="rVenda">—</div>
+PREÇO DE VENDA
 
-<p>Preço informado</p>
+</h2>
+
+<div class="num" id="rVenda">
+
+—
 
 </div>
+
+<p>
+
+Preço informado
+
+</p>
+
+</div>
+
 
 <div class="result">
 
-<h2>LUCRO BRUTO</h2>
+<h2>
 
-<div class="num" id="rLucro">—</div>
+LUCRO BRUTO
 
-<p>Venda − custo</p>
+</h2>
+
+<div class="num" id="rLucro">
+
+—
 
 </div>
+
+<p>
+
+Venda − custo
+
+</p>
+
+</div>
+
 
 <div class="result">
 
-<h2>MARGEM REAL</h2>
+<h2>
 
-<div class="num" id="rMargem">—</div>
+MARGEM REAL
 
-<p>Lucro ÷ venda × 100</p>
+</h2>
+
+<div class="num" id="rMargem">
+
+—
 
 </div>
+
+<p>
+
+Lucro ÷ venda × 100
+
+</p>
+
+</div>
+
 
 <div class="result">
 
-<h2>MARKUP</h2>
+<h2>
 
-<div class="num" id="rMarkup">—</div>
+MARKUP
 
-<p>Venda ÷ custo</p>
+</h2>
+
+<div class="num" id="rMarkup">
+
+—
 
 </div>
+
+<p>
+
+Venda ÷ custo
+
+</p>
+
+</div>
+
 
 <div class="formulas">
 
-<b>FÓRMULAS</b>
+<b>
+
+FÓRMULAS
+
+</b>
 
 <br>
 
@@ -385,23 +573,49 @@ Markup = Preço de Venda ÷ Custo
 
 </div>
 
+
 <button id="limpar">
+
 LIMPAR TUDO
+
 </button>
+
+
+<!-- BOTÃO DE INSTALAÇÃO -->
+
+<button
+
+id="installButton"
+
+class="install-button"
+
+hidden>
+
+📲 INSTALAR CALCULADORA DIALLI
+
+</button>
+
 
 <div class="footer">
 
 Desenvolvido por
 
-<strong>João Siena</strong>
+<strong>
+
+João Siena
+
+</strong>
+
+</div>
+
 
 </div>
 
 </div>
 
-</div>
 
 <script>
+
 
 const custo=document.getElementById("custo");
 
@@ -419,11 +633,16 @@ const rMarkup=document.getElementById("rMarkup");
 function converter(valor){
 
 let s=String(valor||"")
+
 .trim()
+
 .replace(/R\$/gi,"")
+
 .replace(/\s/g,"");
 
+
 if(!s)return null;
+
 
 if(s.includes(",") && s.includes(".")){
 
@@ -443,7 +662,9 @@ s=s.replace(",", ".");
 
 }
 
+
 const n=Number(s);
+
 
 return Number.isFinite(n)?n:null;
 
@@ -496,16 +717,26 @@ rVenda.textContent=dinheiro(V);
 
 rLucro.textContent=dinheiro(lucro);
 
+
 rMargem.textContent=
+
 margem.toLocaleString("pt-BR",{
+
 minimumFractionDigits:2,
+
 maximumFractionDigits:2
+
 })+"%";
 
+
 rMarkup.textContent=
+
 markup.toLocaleString("pt-BR",{
+
 minimumFractionDigits:2,
+
 maximumFractionDigits:2
+
 })+"x";
 
 }
@@ -526,6 +757,106 @@ calcular();
 
 };
 
+
+/* =========================
+   INSTALAÇÃO DO APP
+========================= */
+
+
+let deferredPrompt=null;
+
+const installButton=document.getElementById("installButton");
+
+
+/* ANDROID / CHROME */
+
+window.addEventListener("beforeinstallprompt",function(event){
+
+event.preventDefault();
+
+deferredPrompt=event;
+
+installButton.hidden=false;
+
+});
+
+
+installButton.addEventListener("click",async function(){
+
+/* ANDROID */
+
+if(deferredPrompt){
+
+deferredPrompt.prompt();
+
+const result=await deferredPrompt.userChoice;
+
+console.log("Instalação:",result.outcome);
+
+deferredPrompt=null;
+
+installButton.hidden=true;
+
+return;
+
+}
+
+
+/* IPHONE */
+
+const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+
+const isStandalone=
+
+window.navigator.standalone===true ||
+
+window.matchMedia("(display-mode: standalone)").matches;
+
+
+if(isIOS && !isStandalone){
+
+alert(
+
+"Para instalar a Calculadora Dialli no iPhone:\n\n"+
+
+"1. Toque no botão Compartilhar do Safari.\n\n"+
+
+"2. Escolha “Adicionar à Tela de Início”.\n\n"+
+
+"3. Toque em “Adicionar”.\n\n"+
+
+"A Calculadora Dialli aparecerá como um aplicativo na tela inicial."
+
+);
+
+return;
+
+}
+
+
+/* OUTROS NAVEGADORES */
+
+alert(
+
+"Para instalar a Calculadora Dialli, abra o menu do navegador e procure por “Instalar aplicativo” ou “Adicionar à tela inicial”."
+
+);
+
+});
+
+
+/* ESCONDE DEPOIS DE INSTALAR */
+
+window.addEventListener("appinstalled",function(){
+
+installButton.hidden=true;
+
+deferredPrompt=null;
+
+});
+
+
+/* SERVICE WORKER */
 
 if("serviceWorker" in navigator){
 
@@ -549,7 +880,10 @@ console.log("Service Worker:",error);
 
 }
 
+
 </script>
 
+
 </body>
+
 </html>

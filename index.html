@@ -178,16 +178,19 @@ color:#075b2c;
 font-size:18px;
 }
 
+
 /* BOTÃO INSTALAR */
 
 .install-button{
 
 width:100%;
+
 height:58px;
 
 margin-top:16px;
 
 border:0;
+
 border-radius:16px;
 
 background:#15914b;
@@ -216,14 +219,19 @@ background:#0f7c3f;
 
 }
 
+
+/* BOTÃO LIMPAR */
+
 button#limpar{
 
 width:100%;
+
 height:54px;
 
 margin-top:14px;
 
 border:0;
+
 border-radius:15px;
 
 background:#075b2c;
@@ -242,9 +250,11 @@ transform:scale(.98);
 
 }
 
+
 .footer{
 
 text-align:center;
+
 color:white;
 
 padding:25px 0 5px;
@@ -262,6 +272,7 @@ font-size:22px;
 margin-top:5px;
 
 }
+
 
 @media(max-width:600px){
 
@@ -310,21 +321,13 @@ fill="#08733f"/>
 
 
 <text
-
 x="350"
-
 y="205"
-
 text-anchor="middle"
-
 font-family="Arial,sans-serif"
-
 font-size="128"
-
 font-weight="900"
-
 font-style="italic"
-
 fill="white">
 
 Dialli
@@ -333,17 +336,11 @@ Dialli
 
 
 <text
-
 x="350"
-
 y="255"
-
 text-anchor="middle"
-
 font-family="Arial,sans-serif"
-
 font-size="38"
-
 fill="white">
 
 Distribuidora
@@ -352,19 +349,12 @@ Distribuidora
 
 
 <text
-
 x="350"
-
 y="330"
-
 text-anchor="middle"
-
 font-family="Arial,sans-serif"
-
 font-size="27"
-
 font-style="italic"
-
 fill="white">
 
 “Distribuir para melhor servir”
@@ -406,13 +396,9 @@ CUSTO DO PRODUTO
 <span>R$</span>
 
 <input
-
 id="custo"
-
 inputmode="decimal"
-
 placeholder="Digite o custo"
-
 autocomplete="off">
 
 </div>
@@ -437,13 +423,9 @@ PREÇO DE VENDA / OFERTA
 <span>R$</span>
 
 <input
-
 id="venda"
-
 inputmode="decimal"
-
 placeholder="Digite o preço"
-
 autocomplete="off">
 
 </div>
@@ -584,12 +566,8 @@ LIMPAR TUDO
 <!-- BOTÃO DE INSTALAÇÃO -->
 
 <button
-
 id="installButton"
-
-class="install-button"
-
-hidden>
+class="install-button">
 
 📲 INSTALAR CALCULADORA DIALLI
 
@@ -630,16 +608,13 @@ const rMargem=document.getElementById("rMargem");
 const rMarkup=document.getElementById("rMarkup");
 
 
+
 function converter(valor){
 
 let s=String(valor||"")
-
 .trim()
-
 .replace(/R\$/gi,"")
-
 .replace(/\s/g,"");
-
 
 if(!s)return null;
 
@@ -665,10 +640,10 @@ s=s.replace(",", ".");
 
 const n=Number(s);
 
-
 return Number.isFinite(n)?n:null;
 
 }
+
 
 
 function dinheiro(n){
@@ -682,6 +657,7 @@ currency:"BRL"
 });
 
 }
+
 
 
 function calcular(){
@@ -742,9 +718,11 @@ maximumFractionDigits:2
 }
 
 
+
 custo.addEventListener("input",calcular);
 
 venda.addEventListener("input",calcular);
+
 
 
 document.getElementById("limpar").onclick=function(){
@@ -758,30 +736,37 @@ calcular();
 };
 
 
-/* =========================
-   INSTALAÇÃO DO APP
-========================= */
+
+/* ===================================
+   INSTALAÇÃO ANDROID + IPHONE
+=================================== */
 
 
 let deferredPrompt=null;
 
-const installButton=document.getElementById("installButton");
+const installButton=
+document.getElementById("installButton");
 
 
-/* ANDROID / CHROME */
+/* ANDROID */
 
-window.addEventListener("beforeinstallprompt",function(event){
+window.addEventListener(
+"beforeinstallprompt",
+function(event){
 
 event.preventDefault();
 
 deferredPrompt=event;
 
-installButton.hidden=false;
-
 });
 
 
-installButton.addEventListener("click",async function(){
+/* BOTÃO */
+
+installButton.addEventListener(
+"click",
+async function(){
+
 
 /* ANDROID */
 
@@ -789,13 +774,15 @@ if(deferredPrompt){
 
 deferredPrompt.prompt();
 
-const result=await deferredPrompt.userChoice;
+const choice=
+await deferredPrompt.userChoice;
 
-console.log("Instalação:",result.outcome);
+console.log(
+"Resultado da instalação:",
+choice.outcome
+);
 
 deferredPrompt=null;
-
-installButton.hidden=true;
 
 return;
 
@@ -804,28 +791,31 @@ return;
 
 /* IPHONE */
 
-const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+const isIOS=
+/iphone|ipad|ipod/i.test(
+navigator.userAgent
+);
 
 const isStandalone=
-
 window.navigator.standalone===true ||
-
-window.matchMedia("(display-mode: standalone)").matches;
+window.matchMedia(
+"(display-mode: standalone)"
+).matches;
 
 
 if(isIOS && !isStandalone){
 
 alert(
 
-"Para instalar a Calculadora Dialli no iPhone:\n\n"+
+"📲 INSTALAR CALCULADORA DIALLI\n\n"+
 
-"1. Toque no botão Compartilhar do Safari.\n\n"+
+"1️⃣ Toque no botão COMPARTILHAR do Safari.\n\n"+
 
-"2. Escolha “Adicionar à Tela de Início”.\n\n"+
+"2️⃣ Procure por “Adicionar à Tela de Início”.\n\n"+
 
-"3. Toque em “Adicionar”.\n\n"+
+"3️⃣ Toque em “Adicionar”.\n\n"+
 
-"A Calculadora Dialli aparecerá como um aplicativo na tela inicial."
+"Pronto! A Calculadora Dialli ficará na tela inicial como um aplicativo."
 
 );
 
@@ -834,45 +824,64 @@ return;
 }
 
 
-/* OUTROS NAVEGADORES */
+/* ANDROID SEM PROMPT */
 
 alert(
 
-"Para instalar a Calculadora Dialli, abra o menu do navegador e procure por “Instalar aplicativo” ou “Adicionar à tela inicial”."
+"Para instalar a Calculadora Dialli:\n\n"+
+
+"Abra o menu do navegador e escolha:\n\n"+
+
+"“Instalar aplicativo”\n\n"+
+
+"ou\n\n"+
+
+"“Adicionar à tela inicial”."
 
 );
 
 });
 
 
-/* ESCONDE DEPOIS DE INSTALAR */
+/* ESCONDE BOTÃO APÓS INSTALAÇÃO */
 
-window.addEventListener("appinstalled",function(){
-
-installButton.hidden=true;
+window.addEventListener(
+"appinstalled",
+function(){
 
 deferredPrompt=null;
 
 });
 
 
-/* SERVICE WORKER */
+/* ===================================
+   SERVICE WORKER
+=================================== */
+
 
 if("serviceWorker" in navigator){
 
-window.addEventListener("load",function(){
+window.addEventListener(
+"load",
+function(){
 
-navigator.serviceWorker.register("./sw.js")
+navigator.serviceWorker
+.register("./sw.js")
 
 .then(function(){
 
-console.log("Calculadora Dialli: modo offline ativado.");
+console.log(
+"Calculadora Dialli: offline ativado."
+);
 
 })
 
 .catch(function(error){
 
-console.log("Service Worker:",error);
+console.log(
+"Erro no Service Worker:",
+error
+);
 
 });
 

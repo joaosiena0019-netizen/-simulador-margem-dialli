@@ -1,0 +1,12 @@
+{
+  "name": "Calculadora Dialli",
+  "short_name": "Calculadora Dialli",
+  "description": "Calculadora de margem, lucro e markup da Dialli.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#012b17",
+  "theme_color": "#075b2c",
+  "orientation": "portrait",
+  "lang": "pt-BR",
+  "icons": []
+}
